@@ -1,0 +1,191 @@
+definitions:
+  models.ApplyJob:
+    properties:
+      created_at:
+        type: string
+      delete_at:
+        format: date-time
+        type: string
+      id_apply:
+        type: integer
+      job_id:
+        type: integer
+      status:
+        type: string
+      updated_at:
+        type: string
+      user_id:
+        type: integer
+    type: object
+  models.Jobvacancy:
+    properties:
+      applyjob:
+        items:
+          $ref: '#/definitions/models.ApplyJob'
+        type: array
+      company_desc:
+        type: string
+      company_name:
+        type: string
+      company_salary:
+        type: integer
+      company_status:
+        type: integer
+      created_at:
+        type: string
+      delete_at:
+        format: date-time
+        type: string
+      id_jobvacancy:
+        type: integer
+      title:
+        type: string
+      updated_at:
+        type: string
+    type: object
+  models.User:
+    properties:
+      applyjobs:
+        items:
+          $ref: '#/definitions/models.ApplyJob'
+        type: array
+      created_at:
+        type: string
+      delete_at:
+        format: date-time
+        type: string
+      email:
+        type: string
+      id_user:
+        type: integer
+      password:
+        type: string
+      role:
+        type: string
+      updated_at:
+        type: string
+      username:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /change-password:
+    post:
+      description: Role admin bisa mengganti password semua user, role job seeker
+        by id
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: Change Password
+      tags:
+      - Authentication
+  /job-vacancy:
+    get:
+      description: Menampilkan semua list job vacancy
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Jobvacancy'
+            type: array
+      summary: Get all job vacancies
+      tags:
+      - Job Vacancy
+    post:
+      description: Create a new job
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Jobvacancy'
+            type: array
+      summary: Create job vacancy
+      tags:
+      - Job Vacancy
+  /job-vacancy/:id:
+    delete:
+      description: Delete a job from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Jobvacancy'
+            type: array
+      summary: Delete Job Vacancy
+      tags:
+      - Job Vacancy
+    get:
+      description: Detail Job Vacancy
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Jobvacancy'
+            type: array
+      summary: Detail Job Vacancy
+      tags:
+      - Job Vacancy
+    put:
+      description: Update job
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Jobvacancy'
+            type: array
+      summary: Update job vacancy
+      tags:
+      - Job Vacancy
+  /login:
+    post:
+      description: Login akun dengan auth JWT
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: Login
+      tags:
+      - Authentication
+  /register:
+    post:
+      description: Regisrasi akun dengan role admin dan jobseeker
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.User'
+            type: array
+      summary: Register
+      tags:
+      - Authentication
+swagger: "2.0"
