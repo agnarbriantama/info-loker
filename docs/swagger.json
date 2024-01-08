@@ -4,6 +4,75 @@
         "contact": {}
     },
     "paths": {
+        "/applyjob": {
+            "get": {
+                "description": "menampilkan semuda data list apply job",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ApplyJob"
+                ],
+                "summary": "Get List Apply Job",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ApplyJob"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/applyjob/:id_jobvacancy": {
+            "post": {
+                "description": "melakukan apply job",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ApplyJob"
+                ],
+                "summary": "Apply Job Handler",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ApplyJob"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/applyjob/:id_jobvacancy/:id_apply": {
+            "put": {
+                "description": "update status pending to applied or rejected",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "ApplyJob"
+                ],
+                "summary": "Confirm Status Apply Job",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.ApplyJob"
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/change-password": {
             "post": {
                 "description": "Role admin bisa mengganti password semua user, role job seeker by id",

@@ -70,6 +70,51 @@ definitions:
 info:
   contact: {}
 paths:
+  /applyjob:
+    get:
+      description: menampilkan semuda data list apply job
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ApplyJob'
+            type: array
+      summary: Get List Apply Job
+      tags:
+      - ApplyJob
+  /applyjob/:id_jobvacancy:
+    post:
+      description: melakukan apply job
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ApplyJob'
+            type: array
+      summary: Apply Job Handler
+      tags:
+      - ApplyJob
+  /applyjob/:id_jobvacancy/:id_apply:
+    put:
+      description: update status pending to applied or rejected
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.ApplyJob'
+            type: array
+      summary: Confirm Status Apply Job
+      tags:
+      - ApplyJob
   /change-password:
     post:
       description: Role admin bisa mengganti password semua user, role job seeker

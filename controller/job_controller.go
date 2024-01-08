@@ -55,6 +55,9 @@ func GetJobVacancyByID(c *fiber.Ctx) error {
 // @Success 200 {array} models.Jobvacancy
 // @Router /job-vacancy [post]
 func CreateJobVacancy(c *fiber.Ctx) error {
+	if err := protectWithJWT(c, "admin"); err != nil {
+        return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
+    }
     // Bind request payload ke struct Jobvacancy
     var jobVacancy models.Jobvacancy
     if err := c.BodyParser(&jobVacancy); err != nil {
@@ -77,6 +80,9 @@ func CreateJobVacancy(c *fiber.Ctx) error {
 // @Success 200 {array} models.Jobvacancy
 // @Router /job-vacancy/:id [put]
 func UpdateJobVacancy(c *fiber.Ctx) error {
+	if err := protectWithJWT(c, "admin"); err != nil {
+        return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
+    }
     // Mendapatkan ID job vacancy dari parameter URL
     id := c.Params("id")
 
@@ -107,6 +113,9 @@ func UpdateJobVacancy(c *fiber.Ctx) error {
 // @Success 200 {array} models.Jobvacancy
 // @Router /job-vacancy/:id [delete]
 func DeleteJobVacancy(c *fiber.Ctx) error {
+	if err := protectWithJWT(c, "admin"); err != nil {
+        return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
+    }
 	// Mendapatkan ID job vacancy dari parameter URL
 	id := c.Params("id")
 

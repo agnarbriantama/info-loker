@@ -71,6 +71,9 @@ func ApplyJobHandler(c *fiber.Ctx) error {
 // @Success 200 {array} models.ApplyJob
 // @Router /applyjob [get]
 func GetAllApplyJobsHandler(c *fiber.Ctx) error {
+	if err := protectWithJWT(c, "admin"); err != nil {
+        return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
+    }
     jobID, err := strconv.ParseUint(c.Params("job_id"), 10, 64)
     if err != nil {
         return c.Status(fiber.StatusBadRequest).JSON(fiber.Map{"error": "Invalid job_id"})
@@ -152,7 +155,10 @@ func ApplyStatusHandler(c *fiber.Ctx) error {
 }
 
 
-func DeleteApplicationHandler(c *fiber.Ctx) error {
+func DeleteApplyHandler(c *fiber.Ctx) error {
+	if err := protectWithJWT(c, "admin"); err != nil {
+        return c.Status(fiber.StatusUnauthorized).JSON(fiber.Map{"error": "Unauthorized"})
+    }
    // Mendapatkan id_user dari token JWT
     idUser, err := GetUserIdFromToken(c)
     if err != nil {

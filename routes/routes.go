@@ -51,7 +51,7 @@ func SetupRoutes(app *fiber.App, ) {
 	app.Get("/applyjob", controller.GetAllApplyJobsHandler)
 	app.Post("/applyjob/:id_jobvacancy",  controller.ApplyJobHandler)
 	app.Put("/applyjob/:id_jobvacancy/:id_apply", controller.ApplyStatusHandler)
-	app.Delete("/applyjob/:id_apply", controller.DeleteApplicationHandler)
+	app.Delete("/applyjob/:id_apply", controller.DeleteApplyHandler)
 	
 
 }
